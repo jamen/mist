@@ -7,6 +7,11 @@ Input:
 - World
   - Foo bar
     baz qux
+    oof rab
+
+  # Foo bar
+  - test
+    - example
 ```
 
 Output:
@@ -15,7 +20,12 @@ Output:
   <span>Hello</span>
   <span>World
     <span class="list">
-      <span>Foo bar baz qux</span>
+      <span>Foo bar baz qux oof rab</span>
+      <span>test
+        <span class="list">
+          <span>example</span>
+        </span>
+      </span>
     </span>
   </span>
 </span>
@@ -34,6 +44,20 @@ $ mist < spec.mist > spec.html
 ```
 ```shell
 $ <input_command> | mist > spec.html
+```
+
+Use as a module.
+
+```javascript
+var input = /* some mist data */
+
+// Individual functions
+var tokens = mist.tokenize(input);
+var ast = mist.transform(tokens);
+var output = mist.resolve(ast);
+
+// Simplify the process into one function
+var output = mist.render(input);
 ```
 
 ## Credits
